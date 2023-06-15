@@ -46,13 +46,17 @@ class Die(private val color: Color, private val numSides: Sides) {
     constructor() : this(Color.WHITE, Sides.SIX)
     constructor(numSides: Sides) : this(Color.WHITE, numSides)
 
-    //roll function which returns a random value
+    // Roll function which returns a random value
     fun roll() {
         sideUp = Random.nextInt(1, numSides.value + 1)
         println("Rolling the ${color.name.lowercase()} d${numSides.value}...")
     }
+    // Getter for highest side
+    fun getHighestSide(): Int{
+        return numSides.value
+    }
 
-    //Prints die color and highest side with its current sideUp
+    // Prints die color and highest side with its current sideUp
     override fun toString(): String {
         return "A ${color.name.lowercase()} die with ${numSides.value} faces and currently showing a $sideUp."
     }
