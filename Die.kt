@@ -1,14 +1,34 @@
-import kotlin.random.Random
-import java.util.Scanner
+package game
 
-enum class Color{
-    RED, WHITE, BLACK
+import kotlin.random.Random
+enum class Color {
+    RED,
+    WHITE,
+    BLACK,
+    Orange
 }
 
-enum class Sides(val value:Int){
-    ONE(1), TWO(2), THREE(3), FOUR(4), FIVE(5), SIX(6), SEVEN(7), EIGHT(8),
-    NINE(9), TEN(10), ELEVEN(11), TWELVE(12), THIRTEEN(13), FOURTEEN(14), FIFTEEN(15), 
-    SIXTEEN(16), SEVENTEEN(17), EIGHTEEN(18), NINETEEN(19), TWENTY(20)
+enum class Sides(val value: Int) {
+    ONE(1),
+    TWO(2),
+    THREE(3),
+    FOUR(4),
+    FIVE(5),
+    SIX(6),
+    SEVEN(7),
+    EIGHT(8),
+    NINE(9),
+    TEN(10),
+    ELEVEN(11),
+    TWELVE(12),
+    THIRTEEN(13),
+    FOURTEEN(14),
+    FIFTEEN(15),
+    SIXTEEN(16),
+    SEVENTEEN(17),
+    EIGHTEEN(18),
+    NINETEEN(19),
+    TWENTY(20)
 }
 
 // Primary constructor is in the class signature
@@ -18,73 +38,22 @@ class Die(private val color: Color, private val numSides: Sides) {
 
     // Called each time we initialize a new Die object.
     init {
-        roll()
+        sideUp = Random.nextInt(1, numSides.value + 1)
+        println("Creating a ${color.name.lowercase()} d${numSides.value}")
     }
 
-    // Secondary constructors that call the primary constructor
-    constructor(): this(Color.WHITE, Sides.SIX)
-    constructor(numSides: Sides): this(Color.WHITE, numSides)
+    // Two Secondary constructors that call the primary constructor
+    constructor() : this(Color.WHITE, Sides.SIX)
+    constructor(numSides: Sides) : this(Color.WHITE, numSides)
 
+    //roll function which returns a random value
     fun roll() {
-        sideUp = Random.nextInt(1, numSides.value + 1) 
+        sideUp = Random.nextInt(1, numSides.value + 1)
+        println("Rolling the ${color.name.lowercase()} d${numSides.value}...")
     }
 
+    //Prints die color and highest side with its current sideUp
     override fun toString(): String {
         return "A ${color.name.lowercase()} die with ${numSides.value} faces and currently showing a $sideUp."
-    }
-}
-
-fun game(){
-    val sc = Scanner(System.`in`)
-    print("""
-        *****Menu*****
-        Please select the game you would like to play:
-        1. Check your lucky number between 1-20
-        2. In how many rolls can you get 5 of a kind
-        3. Look at the highest side on a die
-        **************
-        Enter the value: 
-    """.trimIndent())
-
-    val userSelection: Int = sc.nextInt()
-    
-    fun luckyNum(){
-        val die = Die(Color.RED, Sides.TWENTY)
-        println("Your lucky number is ${die.sideUp}")
-    }
-        fun fiveAlike(){
-        val die1 = Die()
-        val die2 = Die()
-        val die3 = Die()
-        val die4 = Die()
-        val die5 = Die()
-        var count: Int = 1
-        
-        while (((die1.sideUp == die2.sideUp) && (die1.sideUp == die3.sideUp) && (die1.sideUp == die4.sideUp) && (die1.sideUp == die5.sideUp) && 
-                (die2.sideUp == die3.sideUp) && (die2.sideUp == die4.sideUp) && (die2.sideUp == die5.sideUp) 
-                && (die3.sideUp == die4.sideUp) && (die3.sideUp == die5.sideUp) && (die4.sideUp == die5.sideUp)) == false){
-            count +=1
-            die1.roll()
-            die2.roll()
-            die3.roll()
-            die4.roll()
-            die5.roll()
-            println("${die1.sideUp} ${die2.sideUp} ${die3.sideUp} ${die4.sideUp} ${die5.sideUp}")
-        }
-        
-        println((die1.sideUp != die2.sideUp) && (die1.sideUp!= die3.sideUp) && (die1.sideUp != die4.sideUp) && (die1.sideUp != die5.sideUp) && 
-                (die2.sideUp != die3.sideUp) && (die2.sideUp != die4.sideUp) && (die2.sideUp != die5.sideUp) 
-                && (die3.sideUp != die4.sideUp) && (die3.sideUp != die5.sideUp) && (die4.sideUp != die5.sideUp))
-        println("${die1.sideUp} ${die2.sideUp} ${die3.sideUp} ${die4.sideUp} ${die5.sideUp}")
-        println("It took ${count} times to get five of a kind")
-    }
-    
-    when (userSelection) {
-        1 -> {
-            luckyNum()
-        }
-        2 -> {
-            fiveAlike()
-        }
     }
 }
