@@ -52,7 +52,33 @@ fun game(){
         val die = Die(Color.RED, Sides.TWENTY)
         println("Your lucky number is ${die.sideUp}")
     }
-
+        fun fiveAlike(){
+        val die1 = Die()
+        val die2 = Die()
+        val die3 = Die()
+        val die4 = Die()
+        val die5 = Die()
+        var count: Int = 1
+        
+        while (((die1.sideUp == die2.sideUp) && (die1.sideUp == die3.sideUp) && (die1.sideUp == die4.sideUp) && (die1.sideUp == die5.sideUp) && 
+                (die2.sideUp == die3.sideUp) && (die2.sideUp == die4.sideUp) && (die2.sideUp == die5.sideUp) 
+                && (die3.sideUp == die4.sideUp) && (die3.sideUp == die5.sideUp) && (die4.sideUp == die5.sideUp)) == false){
+            count +=1
+            die1.roll()
+            die2.roll()
+            die3.roll()
+            die4.roll()
+            die5.roll()
+            println("${die1.sideUp} ${die2.sideUp} ${die3.sideUp} ${die4.sideUp} ${die5.sideUp}")
+        }
+        
+        println((die1.sideUp != die2.sideUp) && (die1.sideUp!= die3.sideUp) && (die1.sideUp != die4.sideUp) && (die1.sideUp != die5.sideUp) && 
+                (die2.sideUp != die3.sideUp) && (die2.sideUp != die4.sideUp) && (die2.sideUp != die5.sideUp) 
+                && (die3.sideUp != die4.sideUp) && (die3.sideUp != die5.sideUp) && (die4.sideUp != die5.sideUp))
+        println("${die1.sideUp} ${die2.sideUp} ${die3.sideUp} ${die4.sideUp} ${die5.sideUp}")
+        println("It took ${count} times to get five of a kind")
+    }
+    
     when (userSelection) {
         1 -> {
             luckyNum()
