@@ -1,4 +1,5 @@
 import kotlin.random.Random
+import java.util.Scanner
 
 enum class Color{
     RED, WHITE, BLACK
@@ -25,7 +26,6 @@ class Die(private val color: Color, private val numSides: Sides) {
     constructor(numSides: Sides): this(Color.WHITE, numSides)
 
     fun roll() {
-        println("rolling the die")
         sideUp = Random.nextInt(1, numSides.value + 1) 
     }
 
@@ -34,3 +34,31 @@ class Die(private val color: Color, private val numSides: Sides) {
     }
 }
 
+fun game(){
+    val sc = Scanner(System.`in`)
+    print("""
+        *****Menu*****
+        Please select the game you would like to play:
+        1. Check your lucky number between 1-20
+        2. In how many rolls can you get 5 of a kind
+        3. Look at the highest side on a die
+        **************
+        Enter the value: 
+    """.trimIndent())
+
+    val userSelection: Int = sc.nextInt()
+    
+    fun luckyNum(){
+        val die = Die(Color.RED, Sides.TWENTY)
+        println("Your lucky number is ${die.sideUp}")
+    }
+
+    when (userSelection) {
+        1 -> {
+            luckyNum()
+        }
+        2 -> {
+            fiveAlike()
+        }
+    }
+}
